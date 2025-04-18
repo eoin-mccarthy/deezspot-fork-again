@@ -67,10 +67,13 @@ def var_excape(string):
     return string.strip()
 
 def convert_to_date(date: str):
+    pattern = r"^\d{4}-\d{2}$"
     if date == "0000-00-00":
         date = "0001-01-01"
     elif date.isdigit():
         date = f"{date}-01-01"
+    elif bool(re.match(pattern, date)):
+        date = f"{date}-01"
     date = datetime.strptime(date, "%Y-%m-%d")
     return date
 
